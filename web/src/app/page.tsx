@@ -16,10 +16,10 @@ export default function Home() {
 
     try {
       // Add your API call logic here
-      const response = await fetch("/api/chat", {
+      const response = await fetch("http://localhost:8000/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ repoUrl, query }),
+        body: JSON.stringify({ repo_url : repoUrl, query }),
       });
 
       const data = await response.json();

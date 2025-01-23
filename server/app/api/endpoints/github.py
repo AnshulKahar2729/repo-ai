@@ -11,6 +11,10 @@ vector_store = VectorStore()
 async def process_repo(req: RepoQuery):
     try:
         repo_contents = await github_service.get_repo_contents(req.repo_url)
+
+        print(f"Processing {len(repo_contents)} files")
+        # print repo_contents
+        print("repo_contents", repo_contents)
         vector_store.add_texts(repo_contents)
         response = vector_store.query(req.query)
         return RepoResponse(response=response)
