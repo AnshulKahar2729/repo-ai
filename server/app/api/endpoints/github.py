@@ -9,9 +9,10 @@ vector_store = VectorStore()
 
 @router.post("/chat", response_model=RepoResponse)
 async def process_repo(req: RepoQuery):
+    print("Processing repo", req.repo_url)
+    print("Query", req.query)
     try:
         repo_contents = await github_service.get_repo_contents(req.repo_url)
-
         print(f"Processing {len(repo_contents)} files")
         # print repo_contents
         print("repo_contents", repo_contents)
