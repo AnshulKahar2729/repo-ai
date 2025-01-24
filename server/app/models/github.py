@@ -6,3 +6,4 @@ class RepoQuery(BaseModel):
 
 class RepoResponse(BaseModel):
     response: str
+    

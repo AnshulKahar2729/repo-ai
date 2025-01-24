@@ -7,6 +7,8 @@ router = APIRouter()
 github_service = GitHubService()
 vector_store = VectorStore()
 
+
+
 @router.post("/chat", response_model=RepoResponse)
 async def process_repo(req: RepoQuery):
     print("Processing repo", req.repo_url)
@@ -21,3 +23,10 @@ async def process_repo(req: RepoQuery):
         return RepoResponse(response=response)
     except Exception as e:
         raise HTTPException(500, str(e))
+    
+@app.post("/analyze-repo")
+async def analyze_repo(repo_url: str):
+    qa_system = GitHubRepoQA()
+    repo_id = hash(repo_url)  # Generate unique ID
+    await qa_system.process_repo(repo_url)
+    return {"repo_id": repo_id}
