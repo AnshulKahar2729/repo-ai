@@ -7,3 +7,4 @@ def parse_github_url(url: str) -> tuple[str, str]:
     if not match:
         raise HTTPException(400, "Invalid GitHub URL")
     return match.group(1), match.group(2)
+

@@ -24,7 +24,7 @@ async def process_repo(req: RepoQuery):
     except Exception as e:
         raise HTTPException(500, str(e))
     
-@app.post("/analyze-repo")
+@router.post("/analyze-repo")
 async def analyze_repo(repo_url: str):
     qa_system = GitHubRepoQA()
     repo_id = hash(repo_url)  # Generate unique ID

@@ -9,11 +9,9 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
 
-
 class GitHubService:
     def __init__(self):
         self.client = Github(settings.GITHUB_TOKEN)
-        self.github_client = Github(GITHUB_TOKEN)
         self.embeddings = OpenAIEmbeddings()
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,

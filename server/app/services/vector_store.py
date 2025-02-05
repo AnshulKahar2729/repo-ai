@@ -1,11 +1,15 @@
-from langchain_openai import OpenAI, OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from app.core.config import settings
 from typing import List, Dict
 
 class VectorStore:
     def __init__(self):
-        self.embeddings = OpenAIEmbeddings(api_key=settings.OPENAI_API_KEY)
+        # Ensure the API key is passed correctly
+        api_key = settings.OPENAI_API_KEY
+        if not api_key:
+            raise ValueError("OPENAI_API_KEY is missing.")
+        self.embeddings = OpenAIEmbeddings(api_key=api_key)
         self.db = Chroma(
             persist_directory="./chroma_db",
             embedding_function=self.embeddings
